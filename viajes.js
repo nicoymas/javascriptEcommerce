@@ -2,8 +2,17 @@ document.addEventListener('DOMContentLoaded', function() {
     let costo=0
     let metodo
     let aumento
+    let data
     
-    function validacion(usuario,password){
+    
+
+    const viajes =[
+        {id:"C" ,lugar:"Cancun", precio: 2000},
+        {id:"P" ,lugar:"Playa del Carmen", precio: 2500},
+        {id:"J" ,lugar:"Japon", precio: 3000},
+    ]
+    
+    function validacion(){
         usuario= prompt("ingrese un usuario de 5 a 10 digitos:")
         password=parseInt(prompt("ingrese un pasword (debe ser numerico):"))
         if((usuario.length >= 5 && usuario.length <=10) && Number(password) ){
@@ -12,49 +21,45 @@ document.addEventListener('DOMContentLoaded', function() {
             return(false)
         }
     }
-    function Destinos(lugares){
-        lugares=prompt("destino: japon=J, cuba=C, india=I")
-        if(lugares== "J"){
-            costo=2000
-            alert('el valor del viaje es de '+ costo +"$") 
-            return ("J")
-        }else if(lugares== "C"){
-            costo=2500
-            alert('el valor del viaje es de '+ costo +"$")
-            return ("C")
-        }else if(lugares== "I"){
-            costo=3000
-            alert('el valor del viaje es de '+ costo +"$")
-            return("I")
+    
+    function destinos(){
+        pais = prompt("ingrese destino 'C' para cancun, 'P' para playa del carmen, 'J' para japon: ").toUpperCase()
+        
+        viajes.forEach((obj)=>{
+        
+            if(obj.id === pais){
+                costo = obj.precio
+                data= obj.id
+            }
+            
+        });
+        return data
+    }
+    function confirmacion(){
+        let confirm=prompt("para confirmar reserva ingrese 'si' caso contrario 'no':")
+            if(confirm == "si"){
+                return true
+            }else{
+                return false
+            }
+    }
+    function metodoDePago(costo){
+        metodo= prompt("ingrese 'T' para el pago con targeta(con un aumento del 15%) o 'E' para efectivo (descuento del 15%): ").toUpperCase()
+        if(metodo== "T" || metodo== "E"){
+            aumento=costo*0.15
+            if(metodo== "T"){
+                costo+= aumento
+                alert("eligio el pago con targeta, monto total a pagar es de "+ costo)
+                c=confirmacion()
+            }else{
+                costo-= aumento
+                alert("el costo en efectivo es de " + costo)
+                c=confirmacion()
+            }return c
         }else{
             alert("ingrese datos correctos")
         }
-    }
-    function metododepago(costo){
-        metodo= prompt("ingrese 'T' para el pago con targeta(con un aumento del 15%) o 'E' para efectivo (descuento del 15%): ")
-        if(metodo== "T"){
-            aumento=costo*0.15
-            costo+= aumento
-            alert("eligio el pago con targeta, monto total a pagar es de "+ costo)
-            confirmacion=prompt("para confirmar reserva ingrese 'si' caso contrario 'no':")
-            if(confirmacion== "si"){
-                return true
-            }else{
-                return false
-            }
-        }else if(metodo == "E"){
-            descuento=costo*0.15
-            costo-= descuento
-            alert("el costo en efectivo es de " + costo)
-            confirmacion=prompt("para confirmar reserva ingrese 'si' caso contrario 'no':")
-            if(confirmacion== "si"){
-                return true
-            }else{
-                return false
-            }
-        }else{
-            alert("ingrese dato correcto")
-        }
+        
     }
     for(let i=1; i<=3; i++){
         alert("bienvenido a tu agencia de viajes \npara seleccionar destino ingrese su usuario y contraseña \n tiene 3 intentos")
@@ -64,9 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
             while(true){
                 let opcion=prompt("si desea ver los destinos ingrese 'ver' \n para salir 'salir': ")
                 if(opcion=="ver"){
-                    let destino= Destinos()
-                    if(destino == "J" || destino == "C" || destino == "I"){
-                        let pagos=metododepago(costo)
+                    let destino= destinos(data)
+                    if(destino == "J" || destino == "C" || destino == "P"){
+                        let pagos=metodoDePago(costo)
                         if(pagos){
                             alert("felicidades su reserva a sido generada")
                         }else{
@@ -87,4 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 }, false);    
+
+
+
 
