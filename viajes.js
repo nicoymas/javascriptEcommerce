@@ -4,19 +4,36 @@ document.addEventListener('DOMContentLoaded', function() {
     let aumento
     let data
     
-    
+    class Reserva{
+        constructor(nombre,apellido,documento,pago){
+            this.nombre=nombre;
+            this.apellido=apellido;
+            this.documento=documento;
+            this.pago=pago;
+            this.destino=[];
+        }
+        agregarDestino(viaje){
+            this.destino.push(viaje);
+        }
+        obtenerDestino(region){
+            return this.destino.find((viaje)=>(viaje.region==region));
+        }
+    }
 
     const viajes =[
-        {id:"C" ,lugar:"Cancun", precio: 2000},
-        {id:"P" ,lugar:"Playa del Carmen", precio: 2500},
-        {id:"J" ,lugar:"Japon", precio: 3000},
+        {id:"C" ,region:"Cancun", precio: 2000},
+        {id:"P" ,region:"Playa del Carmen", precio: 2500},
+        {id:"J" ,region:"Japon", precio: 3000},
     ]
     
     function validacion(){
         usuario= prompt("ingrese un usuario de 5 a 10 digitos:")
         password=parseInt(prompt("ingrese un pasword (debe ser numerico):"))
-        if((usuario.length >= 5 && usuario.length <=10) && Number(password) ){
-            return(true)
+        if(((usuario.length >= 5 && usuario.length <=10) && Number(password)) && (usuario !="admin" && password !=1234)){
+            return("usuario y password correctos")
+        }
+        else if(usuario =="admin" && Number(password)==1234){
+            alert("admin")
         }else{
             return(false)
         }
@@ -38,6 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function confirmacion(){
         let confirm=prompt("para confirmar reserva ingrese 'si' caso contrario 'no':")
             if(confirm == "si"){
+                let nombre=prompt("ingrese nombre:")
+                let apellido=prompt("ingrese apellido:")
+                let documento=prompt("ingrese documento:")
+                let pago=true
+                let reserva=new Reserva(nombre,apellido,documento,pago)
+                console.table(reserva)
                 return true
             }else{
                 return false
