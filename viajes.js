@@ -20,10 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     class Viaje{
-        constructor(id,region,precio){
+        constructor(id,region,precio,imagen){
             this.id=id;
             this.region=region;
             this.precio=precio;
+            this.imagen=imagen
             this.hospodeaje=[];
         }
         agregarHospedaje(host){
@@ -32,7 +33,10 @@ document.addEventListener('DOMContentLoaded', function() {
         buscarHospedaje(hotel){
             return this.hospodeaje.find((host)=>(host.hotel==hotel));
         }
-    
+        generadorHTML=()=>{
+            return`<h3 style="color:green"> ID: ${this.id}</h3> <h4> Lugar: ${this.region}</h4> <h4> Precio: ${this.precio}</h4><br> 
+            <img src="${this.imagen} "alt="${this.nombre}"height="300 px" width="1000 px">` 
+        }
     }
     
     //function createDestino(id,region,precio){
@@ -46,9 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
 
     const viajes =[
-        new Viaje ("1" ,"Cancun",  2000 ),
-        new Viaje ("2" ,"Playa del Carmen", 2500 ),
-        new Viaje ("3" ,"Japon", 3000 ),
+        new Viaje ("1" ,"Cancun",  2000 ,"https://t-cf.bstatic.com/xdata/images/hotel/max1024x768/319148225.jpg?k=2cb97b204ecc359bf8f5b82f183068167ca910965c83ddb72812f5ce6d3b2871&o=&hp=1"),
+        new Viaje ("2" ,"Playa del Carmen", 2500 ,"https://www.coming2.com/co2content/co2image/1418246196811/playa-del-carmen-RMY-PLAYA-CAR.jpg" ),
+        new Viaje ("3" ,"Japon", 3000,"https://www.caracteristicas.co/wp-content/uploads/2018/08/japon-e1573443550864.jpg" ),
     ];
     let divdest=document.getElementById("datos");
     let nuevoul= document.createElement("ul");
@@ -57,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let destino=document.getElementById("destino");
     for(const lugar of viajes){
         let muestra = document.createElement("li");
-        muestra.innerHTML=`<h3 style="color:green"> ID: ${lugar.id}</h3> <h4> Lugar: ${lugar.region}</h4> <h4> Precio: ${lugar.precio}</h4>`;
+        muestra.innerHTML=lugar.generadorHTML();
         nuevoul.appendChild(muestra);
                            
     }
@@ -125,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
     }
-    for(let i=3; i<=3; i--){
+    for(let i=3; i>=1; i--){
         alert("bienvenido a tu agencia de viajes \npara seleccionar destino ingrese su usuario y contraseña \n tiene la siguiente cantidad de intentos diponibles: "+i)
         let ingresar=validacion();
         
