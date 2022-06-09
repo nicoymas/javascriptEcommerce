@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     
     
 </head>
+
 <body>
     <div id="holder">
         <div id="header">
@@ -22,7 +24,7 @@
             
         </div>
         <div id="primero">
-            
+         
         </div>
         <div id="segundo">
             <div>
@@ -33,10 +35,35 @@
             
         </div>
     </div>
+    <div>
+        <form action="" method="post" id="formulario">
+            <label for="nomb">usuario:</label>
+            <input type="text" name="nomb" id="username" title="nombre" >
+            <label for="contraseña">password</label>
+            <input type="number" name="passw" id="pass" title="pasword" >
+            <input type="submit" value="Enviar" >
+        </form>
+    </div>
+    <div>
+        <h3> seleccione su destino por ID</h3>
+        <form action="" method="post" id="formdest">
+            <label for="lugar">Id Destino:</label>
+            <input type="number" name="dest" id="idlugar" title="luga" >
+            <input type="submit" value="Enviar" >
+            <h4 id="error"></h4>
+        </form>
+    </div>
    
+    <br>
    <div id="datos">
+        <!-- <button id ="boton1"> ingresar</button> -->
+        <button id ="boton2"> formas de pago</button>
+        <!-- <button id ="boton3"> formas de pago</button> -->
+        <!-- <button id ="boton4"> destinos</button> -->
+        <!-- <button id ="metodpago"> metodo de pago</button> -->
 
    </div>
+   
     
 </body>
 
