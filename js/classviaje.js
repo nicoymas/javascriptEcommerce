@@ -1,22 +1,6 @@
-//class Reserva{
-//    constructor(nombre,apellido,documento,pago){
-//        this.nombre=nombre;
-//        this.apellido=apellido;
-//        this.documento=documento;
-//        this.pago=pago;
-//        this.destino=[];
-//        
-//        
-//    }
-//    agregarDestino(viajes){
-//        this.destino.push(viajes);
-//    }
-//    obtenerDestino(region){
-//        return this.destino.find((viajes)=>(viajes.region==region));
-//    }
-//}
 
-class Viaje{
+
+export class Viaje{
     constructor(id,region,precio){
         this.id=id;
         this.region=region;
@@ -43,3 +27,5 @@ class host{
     }
     
 }
+
+

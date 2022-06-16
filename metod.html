@@ -7,47 +7,106 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="estilo.css">
-</head>
-<body>
-    
-    <div id="holder">
-        <div id="header">
-            <div>
-                <div >
-                    <h1 id="titulo">
-                        vuele con nosotros
-                    </h1>
-                </div>    
-            </div>
-            
-        </div>
-        <div id="primero">
-            
-            
-        </div>
-        <div id="segundo">
-            <div>
-                <h1 id="volar">
-                    volemos
-                </h1>
-            </div>
-            
-        </div>
-        <div>
-            <form id="metodform">
-                <label for="nomb">consultar metodos</label>
-                <input type="text" name="nomb" id="metodid" title="nombre" >
-                <input type="submit" value="Enviar" >
-            </form>
-        </div>
-        <div>
-            <a href="index.html"> volver</a>
-        </div>
-        <div id="datos">
+    <script src="js/metod.js" type="module"></script>
+    <link href="css/styles.css" rel="stylesheet" />
 
-        </div>
     
-        <script src="metod.js"></script>
+</head>
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#page-top">Start </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#signup">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+            <div class="d-flex justify-content-center">
+                <div class="text-center">
+                    <h1 class="mx-auto my-0 text-uppercase">Grayscale</h1>
+                    <h2 class="text-white-50 mx-auto mt-2 mb-5">A free, responsive, one page Bootstrap theme created by Start Bootstrap.</h2>
+                    <a class="btn btn-primary" href="#about">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </header>
+        
+        
+    
+    <div>
+        <h4>complete los siguientes campos para generar su reserva</h4>
+        <form id="formreserva">
+            <ul>
+                <li>
+                <label for="nomb">nombre</label>
+                <input type="text" name="nomb" id="resnombre" title="nombre" >
+                </li><br>
+                <li>
+                <label for="nomb">apellido</label>
+                <input type="text" name="nomb" id="resapellido" title="apellido" >
+                </li><br>
+                <li>
+                <label for="nomb">documento</label>
+                <input type="number" name="nomb" id="resdoc" title="doc" >
+                </li><br>
+                
+                <div>
+                    <button type="submit" id="confirm">confirmar</button>
+                </div>
+                
+            </ul>
+            <h4 id="imagenviaje"></h4>
+            <h4 id=""></h4>
+            <div id="">
+                
+            </div>
+        </form>
+    </div>
+    <div>
+        <a href="index.html"> volver</a>
+    </div>
+    <div id="datos2">
+    </div>
+    
+    <section class="about-section text-center" id="about">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="text-white mb-4">reserve su vuelo</h2>
+                    <p class="text-white-50">
+                       vuelos disponibles del 1 al 30 de junio de 2022...vuelos varatitos, vuele con tito
+                    </p>
+                </div>
+            </div>
+            <img class="img-fluid" src="assets/img/aircheck_documentos.jpg" alt="..." />
+        </div>
+    </section>
+    
+    
+    <!-- footer-->
+    <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Your Website 2022</div></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        
+        
 </body>
 </html>
