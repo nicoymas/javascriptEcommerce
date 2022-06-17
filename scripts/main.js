@@ -39,15 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h4 class="text-white">id: ${lugar.id}</h4>
                         <h4 class="text-white"> ${lugar.region}</h4>
                         <p class="mb-0 text-white-50">${lugar.precio} $</p>
-                        <hr class="d-none d-lg-block mb-0 ms-0" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>`
-        
-        
-        
+                        <hr class="d-none d-lg-block mb-0 ms-0" /></div></div></div></div></div>`
         
         nuevoul.appendChild(muestra);
     }
@@ -61,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let boton=document.getElementById("botonsubmit");
     boton.addEventListener("click",validacion)    
     
-    //formulario.addEventListener("submit",validacion);
+   
     let respuesta
     
 
