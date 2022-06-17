@@ -1,3 +1,5 @@
+
+
 export class User{
     constructor(user,pass){
         this.user=user
@@ -5,6 +7,9 @@ export class User{
     }
 
     validar(usuario,contrasena){
-       return  (this.user == usuario && this.pass == contrasena)
+        if(this.user == usuario && this.pass == contrasena){
+            return true
+        }
     }
 }
+

@@ -1,6 +1,6 @@
 
 import * as clases from './classviaje.js'
-import * as user from './classusuario.js'
+
 document.addEventListener('DOMContentLoaded', function() {
 
     
@@ -48,33 +48,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    let formulario=document.getElementById("formulario");
+    // let formulario=document.getElementById("formularioguard");
     
-    let boton=document.getElementById("botonsubmit");
-    boton.addEventListener("click",validacion)    
+    // let boton=document.getElementById("botonsubmit");
+    // boton.addEventListener("click",validacion)    
     
    
+    // let respuesta
+    
+
+    // function validacion(e,nombre,pass){
+    //     e.preventDefault();      
+    //     nombre=document.getElementById("formulario")[0].value
+    //     pass=document.getElementById("formulario")[1].value
+    //     if((nombre.length >= 5 && nombre.length <=10) && pass.length >=5 ) {
+            
+            
+    //         formulario.innerHTML=`<h1>Bienvenido  ${nombre}</h1>`
+    //         respuesta= true
+    //     }    
+    //      else{
+    //         let error=document.getElementById("error");
+    //         error.innerHTML=`<h5>los datos ingresados no son validos </h5>`
+    //         respuesta= false
+            
+    //      }return respuesta;
+    // }    
     let respuesta
-    
+    let botonsito=document.getElementById("botonbusca");
+    let formulario=document.getElementById("formularioguard");
+    botonsito.addEventListener("click",(event)=>{
+    event.preventDefault();
+    const busqueda=JSON.parse(localStorage.getItem("usuariosguardados"));
+    const localuser=[
+        {usuario :document.getElementById("formularioguard")[0].value, pasword: document.getElementById("formularioguard")[1].value}
+    ];
+    if(localuser[0].usuario== busqueda[0].usuario && localuser[0].pasword== busqueda[0].pasword){
+        formulario.innerHTML=`<h1>Bienvenido  ${nombre}</h1>`
+        respuesta= true
+        //return true
+    }
+    else{
+        let noencontrado=document.getElementById("error1")
+        noencontrado.innerHTML="Usuario o contraseña incorrectos"
+        respuesta= false
+    }
 
-    function validacion(e,nombre,pass){
-        e.preventDefault();      
-        nombre=document.getElementById("formulario")[0].value
-        pass=document.getElementById("formulario")[1].value
-        if((nombre.length >= 5 && nombre.length <=10) && pass.length >=5 ) {
-            respuesta=true
-            
-            formulario.innerHTML=`<h1>Bienvenido  ${nombre}</h1>`
-        }    
-         else{
-            let error=document.getElementById("error");
-            error.innerHTML=`<h5>los datos ingresados no son validos </h5>`
-            respuesta=false
-            
-         }return respuesta;
-    }    
-    
-
+})
     
     let formdest=document.getElementById("formdest");
     let lugarid=document.getElementById("idlugar");
