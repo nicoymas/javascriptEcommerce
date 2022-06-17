@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="project-text w-100 my-auto text-center text-lg-left">
                         <h4 class="text-white">id: ${lugar.id}</h4>
                         <h4 class="text-white"> ${lugar.region}</h4>
-                        <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                        <p class="mb-0 text-white-50">${lugar.precio} $</p>
                         <hr class="d-none d-lg-block mb-0 ms-0" />
                     </div>
                 </div>
