@@ -181,8 +181,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-//ver
-
-// Una cosa que me faltó mencionar es que vos el input de la contraseña de usuario lo tenés como tipo texto, 
-//pero los navegadores tienen un tipo password específico para estos casos, 
-//que oculta lo que se escribe para que nadie lo pueda ver.

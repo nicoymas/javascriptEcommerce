@@ -1,5 +1,5 @@
 import * as clase from "./classReserva.js";
-
+document.addEventListener('DOMContentLoaded', function() {
 
 const formreserva=document.getElementById("formreserva");
 const butonconfirm=document.getElementById("confirm");
@@ -25,3 +25,5 @@ function confirmacion(event){
     console.table(reserva)
     console.table(destino)   
 }
+
+}, false);   
