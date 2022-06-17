@@ -74,27 +74,32 @@ document.addEventListener('DOMContentLoaded', function() {
             
     //      }return respuesta;
     // }    
-    let respuesta
+    
     let botonsito=document.getElementById("botonbusca");
     let formulario=document.getElementById("formularioguard");
-    botonsito.addEventListener("click",(event)=>{
-    event.preventDefault();
-    const busqueda=JSON.parse(localStorage.getItem("usuariosguardados"));
-    const localuser=[
-        {usuario :document.getElementById("formularioguard")[0].value, pasword: document.getElementById("formularioguard")[1].value}
-    ];
-    if(localuser[0].usuario== busqueda[0].usuario && localuser[0].pasword== busqueda[0].pasword){
-        formulario.innerHTML=`<h1>Bienvenido  ${nombre}</h1>`
-        respuesta= true
-        //return true
-    }
-    else{
-        let noencontrado=document.getElementById("error1")
-        noencontrado.innerHTML="Usuario o contraseña incorrectos"
-        respuesta= false
+    botonsito.addEventListener("click",validacion)
+    function validacion(e){
+        e.preventDefault();
+        const busqueda=JSON.parse(localStorage.getItem("usuariosguardados"));
+        const localuser=[
+            {usuario :document.getElementById("formularioguard")[0].value, pasword: document.getElementById("formularioguard")[1].value}
+        ];
+        if(localuser[0].usuario== busqueda[0].usuario && localuser[0].pasword== busqueda[0].pasword){
+            formulario.innerHTML=`<h1>Bienvenido  ${busqueda[0].usuario}</h1>`
+            //respuesta= true
+            e= true
+        }
+        else{
+            let noencontrado=document.getElementById("error1")
+            noencontrado.innerHTML="Usuario o contraseña incorrectos"
+            e =false
+        }return e;
     }
 
-})
+    //console.log(e)
+    let validare
+    let respuesta=validacion(validare);
+    console.log(validare)
     
     let formdest=document.getElementById("formdest");
     let lugarid=document.getElementById("idlugar");
