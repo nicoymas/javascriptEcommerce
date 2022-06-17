@@ -1,5 +1,6 @@
 
 import * as clases from './classviaje.js'
+import * as user from './classusuario.js'
 document.addEventListener('DOMContentLoaded', function() {
 
     
@@ -63,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //formulario.addEventListener("submit",validacion);
     let respuesta
     
+
     function validacion(e,nombre,pass){
         e.preventDefault();      
         nombre=document.getElementById("formulario")[0].value
