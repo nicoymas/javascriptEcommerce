@@ -48,32 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // let formulario=document.getElementById("formularioguard");
     
-    // let boton=document.getElementById("botonsubmit");
-    // boton.addEventListener("click",validacion)    
-    
-   
-    // let respuesta
-    
-
-    // function validacion(e,nombre,pass){
-    //     e.preventDefault();      
-    //     nombre=document.getElementById("formulario")[0].value
-    //     pass=document.getElementById("formulario")[1].value
-    //     if((nombre.length >= 5 && nombre.length <=10) && pass.length >=5 ) {
-            
-            
-    //         formulario.innerHTML=`<h1>Bienvenido  ${nombre}</h1>`
-    //         respuesta= true
-    //     }    
-    //      else{
-    //         let error=document.getElementById("error");
-    //         error.innerHTML=`<h5>los datos ingresados no son validos </h5>`
-    //         respuesta= false
-            
-    //      }return respuesta;
-    // }    
     
     let botonsito=document.getElementById("botonbusca");
     let formulario=document.getElementById("formularioguard");
