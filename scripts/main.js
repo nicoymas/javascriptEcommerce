@@ -49,66 +49,76 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     
-    
-    let botonsito=document.getElementById("botonbusca");
-    let formulario=document.getElementById("formularioguard");
-    botonsito.addEventListener("click",validacion)
-    function validacion(e){
+    const logout=document.getElementById("logout");
+    logout.addEventListener("click",(e)=>{
         e.preventDefault();
-        const busqueda=JSON.parse(localStorage.getItem("usuariosguardados"));
-        const localuser=[
-            {usuario :document.getElementById("formularioguard")[0].value, pasword: document.getElementById("formularioguard")[1].value}
-        ];
-        if(localuser[0].usuario== busqueda[0].usuario && localuser[0].pasword== busqueda[0].pasword){
-            formulario.innerHTML=`<h1>Bienvenido  ${busqueda[0].usuario}</h1>`
-            //respuesta= true
-            e= true
+        sessionStorage.clear();
+        window.location.href="index.html";
+    })
+    const botonsito=document.getElementById("botonbusca"); 
+    const formulario=document.getElementById("formularioguard");    
+    const busqueda=JSON.parse(localStorage.getItem("usuariosguardados"));
+    const sesion=JSON.parse(sessionStorage.getItem("usuariossesion"));
+    
+    
+    if(sesion == null){
+        botonsito.addEventListener("click",validacion)
+        function validacion(e){
+            e.preventDefault();
+            const localuser=[
+                {usuario :document.getElementById("formularioguard")[0].value, pasword: document.getElementById("formularioguard")[1].value}
+            ];
+            sessionStorage.setItem("usuariossesion",JSON.stringify(localuser));
+            if(localuser[0].usuario== busqueda[0].usuario && localuser[0].pasword== busqueda[0].pasword){
+                formulario.innerHTML=`<h1>Bienvenido  ${busqueda[0].usuario}</h1>`
+                
+            }
+            else{
+                let noencontrado=document.getElementById("error1")
+                noencontrado.innerHTML="Usuario o contraseña incorrectos"
+            }
         }
-        else{
-            let noencontrado=document.getElementById("error1")
-            noencontrado.innerHTML="Usuario o contraseña incorrectos"
-            e =false
-        }return e;
+    }else{
+        formulario.innerHTML=`<h1>Bienvenido  ${busqueda[0].usuario}</h1>`
     }
-
-    //console.log(e)
-    let validare
-    let respuesta=validacion(validare);
-    console.log(validare)
+    
+    
     
     let formdest=document.getElementById("formdest");
     let lugarid=document.getElementById("idlugar");
-    formdest.addEventListener("submit",destinos);
     let costo=0
     let img
     let reg
+ 
+    formdest.addEventListener("submit",destinos);
     function destinos(e){
         e.preventDefault();
-        if(respuesta){
+        if(sesion != null){
             let pais = lugarid.value;
             viajes.forEach((obj)=>{
             
                 if(obj.id == pais){
                     costo = obj.precio
-                    let result= true
+                    
                     img = obj.imagen
                     reg = obj.region
                     let datosviaje={costo:costo,img:img,reg:reg}
                     localStorage.setItem('datosviaje',JSON.stringify(datosviaje));
-                    return result
+                    
                 }
             });
             formdest.innerHTML=`<h2>${pais}</h2>
             <h2>${reg}</h2><h2>${costo}</h2><a href="#metodform"> metodos de pagos</a>
             <img src="${img} "alt="${reg}"height="300 px" width="1000 px id ="imagenviajes">`
             
-            return  result
         }else{
             let mensaje= document.getElementById("error")
-            
             mensaje.innerHTML="<h4>debe registrarse para continuar</h4>";
-        }return result
+        }
     }
+    
+
+    
 
    
     const mensaje=document.getElementById("mensajecosto")
@@ -132,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if(metodo== "TARGETA"){
                 costos+= aumento
                 
-                //confirm.innerHTML=`<a href="metod.html">reservar</a>`
+                confirm.innerHTML=`<a href="metod.html">reservar</a>`
 
                 document.body.appendChild(confirm)
                 metodopago.innerHTML=`<h4>eligio el pago con targeta, monto total a pagar es de  ${costos}</h4><a href="metod.html">reservar</a>`
