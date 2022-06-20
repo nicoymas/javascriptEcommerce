@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }; 
     
  
-    
+    console.log(...viajes)
     
     const divdest=document.getElementById("datos");
     const nuevoul= document.createElement("ul");
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const formulario=document.getElementById("formularioguard");    
     const busqueda=JSON.parse(localStorage.getItem("usuariosguardados"));
     const sesion=JSON.parse(sessionStorage.getItem("usuariossesion"));
-    
+    let noencontrado =document.getElementById("error1")
     
     if(sesion == null){
         botonsito.addEventListener("click",validacion)
@@ -66,16 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 {usuario :document.getElementById("formularioguard")[0].value, pasword: document.getElementById("formularioguard")[1].value}
             ];
             sessionStorage.setItem("usuariossesion",JSON.stringify(localuser));
-            if(localuser[0].usuario== busqueda[0].usuario && localuser[0].pasword== busqueda[0].pasword){
-                location.reload()
-                formulario.innerHTML=`<h1>Bienvenido  ${busqueda[0].usuario}</h1>`
-
-                
-            }
-            else{
-                let noencontrado=document.getElementById("error1")
-                noencontrado.innerHTML="Usuario o contraseña incorrectos"
-            }
+            (localuser[0].usuario== busqueda[0].usuario && localuser[0].pasword== busqueda[0].pasword)?
+                (location.reload(),
+                (formulario.innerHTML=`<h1>Bienvenido  ${busqueda[0].usuario}</h1>`))
+                :
+                noencontrado.innerHTML="Usuario o contraseña incorrectos";
+            
         }
     }else{
         formulario.innerHTML=`<h1>Bienvenido  ${busqueda[0].usuario}</h1>`
@@ -100,7 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     img = obj.imagen
                     reg = obj.region
                     let datosviaje={costo:costo,img:img,reg:reg}
-                    localStorage.setItem('datosviaje',JSON.stringify(datosviaje));  
+                    // aca
+                    sessionStorage.setItem('datosviaje',JSON.stringify(datosviaje));  
                 }
             });
             formdest.innerHTML=`<h2>${pais}</h2>
@@ -121,15 +118,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const metodopago=document.getElementById("metodform");
     const metodid=document.getElementById("metodid");
     metodopago.addEventListener("submit",metodoDePago);
-    let loadviajes=JSON.parse(localStorage.getItem("datosviaje"));
+    let loadviajes=JSON.parse(sessionStorage.getItem("datosviaje"));
+    
     let costos= loadviajes.costo
+    
     let destino=document.getElementById("datos2")
     const confirm=document.getElementById("confirm")
-    
-    
-    
     destino.innerHTML=`<h2>${loadviajes.reg}</h2><h2>${loadviajes.costo}</h2>
     <img src="${loadviajes.img} "alt="${loadviajes.reg}"height="250 px" width="300 px id ="imagenviajes">`
+    
     function metodoDePago(event){
         event.preventDefault();
         let metodo= metodid.value.toUpperCase()

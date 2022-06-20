@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if(validar){ 
         
-            let destino=JSON.parse(localStorage.getItem("datosviaje"))
+            let destino=JSON.parse(sessionStorage.getItem("datosviaje"))
             let reserva=new clase.Reserva(nombre,apellido,documento,pago)
             reserva.agregarDestino(destino);
             localStorage.setItem("reserva",JSON.stringify(reserva));
