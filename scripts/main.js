@@ -100,9 +100,31 @@ document.addEventListener('DOMContentLoaded', function() {
                     sessionStorage.setItem('datosviaje',JSON.stringify(datosviaje));  
                 }
             });
-            formdest.innerHTML=`<h2>${pais}</h2>
-            <h2>${reg}</h2><h2>${costo}</h2><a href="#metodform"> metodos de pagos</a>
-            <img src="${img} "alt="${reg}"height="300 px" width="1000 px id ="imagenviajes">`
+            
+            Swal.fire({
+                title: `viaje a ${reg}`,
+                text: `$ ${costo}`,    
+                imageUrl: `${img}`,
+                imageWidth: 400,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+                
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ver metodos de pago'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "#confirm"; 
+                   
+                }else{
+                    location.reload()
+                }
+                formdest.innerHTML=`<button ><a href="#metodform"> metodos</a></button><br><button><a href="index.html"> seguir con destinos</a></button><h2>${pais}</h2>
+                <h2>${reg}</h2><h2>${costo}</h2>
+                <img src="${img} "alt="${reg}"height="300 px" width="1000 px id ="imagenviajes">`
+              })
+            
             
         }else{
             let mensaje= document.getElementById("error")
