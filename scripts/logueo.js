@@ -1,7 +1,7 @@
 
 import * as clases  from "./classusuario.js"
 
-    
+//guardar usuario en localstorage    
 let boton=document.getElementById("botonsubmit");
 const form=document.getElementById("form");
 boton.addEventListener("click",(e)=>{

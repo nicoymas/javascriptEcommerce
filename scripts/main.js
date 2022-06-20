@@ -44,17 +44,14 @@ document.addEventListener('DOMContentLoaded', function() {
         nuevoul.appendChild(muestra);
     }
     
-   
-
-
-
-    
+     
     const logout=document.getElementById("logout");
     logout.addEventListener("click",(e)=>{
         e.preventDefault();
         sessionStorage.clear();
         window.location.href="index.html";
     })
+
     const botonsito=document.getElementById("botonbusca"); 
     const formulario=document.getElementById("formularioguard");    
     const busqueda=JSON.parse(localStorage.getItem("usuariosguardados"));
@@ -84,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formulario.innerHTML=`<h1>Bienvenido  ${busqueda[0].usuario}</h1>`
     }
     
-    console.log(sesion);
+  
     
     let formdest=document.getElementById("formdest");
     let lugarid=document.getElementById("idlugar");
