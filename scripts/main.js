@@ -70,7 +70,9 @@ document.addEventListener('DOMContentLoaded', function() {
             ];
             sessionStorage.setItem("usuariossesion",JSON.stringify(localuser));
             if(localuser[0].usuario== busqueda[0].usuario && localuser[0].pasword== busqueda[0].pasword){
+                location.reload()
                 formulario.innerHTML=`<h1>Bienvenido  ${busqueda[0].usuario}</h1>`
+
                 
             }
             else{
@@ -82,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formulario.innerHTML=`<h1>Bienvenido  ${busqueda[0].usuario}</h1>`
     }
     
-    
+    console.log(sesion);
     
     let formdest=document.getElementById("formdest");
     let lugarid=document.getElementById("idlugar");
@@ -96,15 +98,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if(sesion != null){
             let pais = lugarid.value;
             viajes.forEach((obj)=>{
-            
                 if(obj.id == pais){
                     costo = obj.precio
-                    
                     img = obj.imagen
                     reg = obj.region
                     let datosviaje={costo:costo,img:img,reg:reg}
-                    localStorage.setItem('datosviaje',JSON.stringify(datosviaje));
-                    
+                    localStorage.setItem('datosviaje',JSON.stringify(datosviaje));  
                 }
             });
             formdest.innerHTML=`<h2>${pais}</h2>
@@ -139,30 +138,28 @@ document.addEventListener('DOMContentLoaded', function() {
         let metodo= metodid.value.toUpperCase()
         if(metodo== "TARGETA" || metodo== "EFECTIVO"){
             let aumento=costos*0.15
-            if(metodo== "TARGETA"){
+            if (metodo== "TARGETA") {
                 costos+= aumento
-                
                 confirm.innerHTML=`<a href="metod.html">reservar</a>`
-
                 document.body.appendChild(confirm)
                 metodopago.innerHTML=`<h4>eligio el pago con targeta, monto total a pagar es de  ${costos}</h4><a href="metod.html">reservar</a>`
             }else{
                 costos-= aumento
                 confirm.innerHTML=`<a href="metod.html">reservar</a>`
-
                 document.body.appendChild(confirm)
                 mensaje.innerHTML=`<h4>eligio el pago con targeta, monto total a pagar es de  ${costos}</h4>`
             }
         }else{
             mensaje.innerHTML="<h4>ingrese datos correctos<h4>";
         }
-    }
-    
-    
+    }    
 }, false);   
 
 
 
+
+
+    
 
 
 
