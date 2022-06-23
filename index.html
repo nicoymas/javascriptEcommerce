@@ -13,9 +13,11 @@
         <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
+        <!-- librerias -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
         <script src="scripts/main.js" type="module"></script>
         <link href="css/styles.css" rel="stylesheet" />
     </head>
@@ -99,10 +101,16 @@
                     <h3> seleccione su destino por ID</h3>
                     <h4 id="error"></h4>
                     <form action="" method="post" id="formdest">
-                        <label for="lugar">Id Destino:</label>
-                        <input type="number" name="dest" id="idlugar" title="luga" >
-                        <input type="submit" value="Enviar" >
+                        <select name="metodos" id="idlugar">               
+                            <option value="1">cancun</option>
+                            <option value="2">playa del carmen</option>
+                            <option value="3">japon</option>
+                        </select>
+                        <!-- <label for="lugar">Id Destino:</label>
                         
+                        <input type="number" name="dest" id="idlugar" title="luga" > -->
+                        <input type="submit" value="Enviar" >
+                        <h4 id="idval" style=" color:rgb(22, 85, 85)"></h4>
                     </form>
                 </div>
                 <!-- Project One Row-->
@@ -153,18 +161,23 @@
 
             <h4>el pago con targeta tiene un 15% de aumento y en efectivo el 15% de descuento indique el metodo de pago efectivo o targeta</h4>
             <form id="metodform">
-                <button>
-                <a id="confirm"></a>
-                </button>
+                
                 <label for="nomb">consultar metodos</label>
-                <input type="text" name="nomb" id="metodid" title="nombre" >
+                <select name="metodos" id="metodid">               
+                    <option value="TARJETA">TARJETA</option>
+                    <option value="EFECTIVO">EFECTIVO</option>
+                </select>
+                <!-- <input type="text" name="nomb" id="metodid" title="nombre" > -->
+                
                 <input type="submit" value="Enviar" >
+                
+                
+                
                 <h4 id="error"></h4>
                 <h4 id="mensajecosto"></h4>
-                <div id="datos">
-                    
+                <div id="datos">    
                 </div>
-            
+                <li id="confirm" ></li>
             </form>
             
             <div id="datos2">

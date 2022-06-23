@@ -15,13 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem("listaviajes",JSON.stringify(viajes));
     
     const guardados=JSON.parse(localStorage.getItem("listaviajes"));
-    const viaje=[];
+    
     for(const objeto of guardados){
-        viaje.push(new clases.Viaje(objeto));
+        new clases.Viaje(objeto);
     }; 
     
- 
-    console.log(...viajes)
+    
     
     const divdest=document.getElementById("datos");
     const nuevoul= document.createElement("ul");
@@ -54,128 +53,140 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const botonsito=document.getElementById("botonbusca"); 
     const formulario=document.getElementById("formularioguard");    
-    const busqueda=JSON.parse(localStorage.getItem("usuariosguardados"));
+    const busqueda=JSON.parse(localStorage.getItem("users"));
     const sesion=JSON.parse(sessionStorage.getItem("usuariossesion"));
     let noencontrado =document.getElementById("error1")
-    
+    console.log(busqueda[3])
     if(sesion == null){
         botonsito.addEventListener("click",validacion)
         function validacion(e){
             e.preventDefault();
-            const localuser=[
-                {usuario :document.getElementById("formularioguard")[0].value, pasword: document.getElementById("formularioguard")[1].value}
-            ];
-            sessionStorage.setItem("usuariossesion",JSON.stringify(localuser));
-            (localuser[0].usuario== busqueda[0].usuario && localuser[0].pasword== busqueda[0].pasword)?
-                (location.reload(),
-                (formulario.innerHTML=`<h1>Bienvenido  ${busqueda[0].usuario}</h1>`))
-                :
-                noencontrado.innerHTML="Usuario o contraseña incorrectos";
+            const localuser={usuario :document.getElementById("formularioguard")[0].value, pasword: document.getElementById("formularioguard")[1].value}
             
+            sessionStorage.setItem("usuariossesion",JSON.stringify(localuser));
+            const encontrado=busqueda.find((el)=> el.usuario == localuser.usuario)
+            const pasencontrado=busqueda.find((el)=> el.pasword == localuser.pasword)
+            if( encontrado && pasencontrado){
+            // if(localuser.usuario== busqueda.usuario && localuser.pasword== busqueda.pasword){
+                location.reload(),
+                formulario.innerHTML=`<h1>Bienvenido  ${localuser.usuario}</h1>`
+                return 
+            } else {
+                noencontrado.innerHTML="Usuario o contraseña incorrectos";
+            }
         }
     }else{
-        formulario.innerHTML=`<h1>Bienvenido  ${busqueda[0].usuario}</h1>`
+        formulario.innerHTML=`<h1>Bienvenido  ${sesion.usuario}</h1>`
     }
     
-  
-    
-    let formdest=document.getElementById("formdest");
+    const formdest=document.getElementById("formdest");
     let lugarid=document.getElementById("idlugar");
     let costo=0
     let img
     let reg
- 
     formdest.addEventListener("submit",destinos);
+    
     function destinos(e){
         e.preventDefault();
         if(sesion != null){
-            let pais = lugarid.value;
-            viajes.forEach((obj)=>{
+            let pais = lugarid.value;            
+            guardados.forEach((obj)=>{
                 if(obj.id == pais){
                     costo = obj.precio
                     img = obj.imagen
-                    reg = obj.region
-                    let datosviaje={costo:costo,img:img,reg:reg}
-                    // aca
-                    sessionStorage.setItem('datosviaje',JSON.stringify(datosviaje));  
-                }
-            });
+                    reg = obj.region     
             
-            Swal.fire({
-                title: `viaje a ${reg}`,
-                text: `$ ${costo}`,    
-                imageUrl: `${img}`,
-                imageWidth: 400,
-                imageHeight: 200,
-                imageAlt: 'Custom image',
-                
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'ver metodos de pago'
-              }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "#confirm"; 
-                   
-                }else{
-                    location.reload()
-                }
-                formdest.innerHTML=`<button ><a href="#metodform"> metodos</a></button><br><button><a href="index.html"> seguir con destinos</a></button><h2>${pais}</h2>
-                <h2>${reg}</h2><h2>${costo}</h2>
-                <img src="${img} "alt="${reg}"height="300 px" width="1000 px id ="imagenviajes">`
-              })
-            
-            
+                    Swal.fire({
+                        title: `viaje a ${reg}`,
+                        text: `$ ${costo}`,    
+                        imageUrl: `${img}`,
+                        imageWidth: 400,
+                        imageHeight: 200,
+                        imageAlt: 'Custom image',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'ver metodos de pago'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            let datosviaje={costo:costo,img:img,reg:reg}
+                            sessionStorage.setItem('datosviaje',JSON.stringify(datosviaje));
+                            location.reload()
+                        }else{
+                            location.reload()
+                        }   
+                    })
+                }             
+            });  
         }else{
             let mensaje= document.getElementById("error")
             mensaje.innerHTML="<h4>debe registrarse para continuar</h4>";
         }
     }
     
-
-    
-
+    //ver monto total
    
     const mensaje=document.getElementById("mensajecosto")
     const metodopago=document.getElementById("metodform");
     const metodid=document.getElementById("metodid");
-    metodopago.addEventListener("submit",metodoDePago);
+    const destino=document.getElementById("datos2")   
+    
     let loadviajes=JSON.parse(sessionStorage.getItem("datosviaje"));
     
-    let costos= loadviajes.costo
+    console.log(loadviajes);
     
-    let destino=document.getElementById("datos2")
-    const confirm=document.getElementById("confirm")
-    destino.innerHTML=`<h2>${loadviajes.reg}</h2><h2>${loadviajes.costo}</h2>
-    <img src="${loadviajes.img} "alt="${loadviajes.reg}"height="250 px" width="300 px id ="imagenviajes">`
+
+    if(loadviajes!= null){
+       
+        
+        formdest.innerHTML=`<button ><a href="#metodform"> metodos</a></button><br><h2></h2>
+        <h2>${loadviajes.reg}</h2><h2>${loadviajes.costo}</h2>
+        <img src="${loadviajes.img} "alt="${loadviajes.reg}"height="300 px" width="1000 px id ="imagenviajes">`
+        
+        const borrarviaje=document.createElement("button");
+        borrarviaje.id="borrarviaje"
+        borrarviaje.textContent="seguir viendo"
+        formdest.append(borrarviaje);
+        
+        borrarviaje.addEventListener("click",(e)=>{
+            e.preventDefault();
+            sessionStorage.removeItem("datosviaje");
+            window.location.href="index.html";
+        })
+        
     
-    function metodoDePago(event){
-        event.preventDefault();
-        let metodo= metodid.value.toUpperCase()
-        if(metodo== "TARGETA" || metodo== "EFECTIVO"){
-            let aumento=costos*0.15
-            if (metodo== "TARGETA") {
-                costos+= aumento
-                confirm.innerHTML=`<a href="metod.html">reservar</a>`
-                document.body.appendChild(confirm)
-                metodopago.innerHTML=`<h4>eligio el pago con targeta, monto total a pagar es de  ${costos}</h4><a href="metod.html">reservar</a>`
+        let costos= loadviajes.costo
+        destino.innerHTML=`<h2>${loadviajes.reg}</h2><h2>${loadviajes.costo}</h2>
+        <img src="${loadviajes.img} "alt="${loadviajes.reg}"height="250 px" width="300 px id ="imagenviajes">`
+        metodopago.addEventListener("submit",metodoDePago);
+        
+        function metodoDePago(event){
+            event.preventDefault();
+            let metodo= metodid.value
+            if(metodo== "TARJETA" || metodo== "EFECTIVO"){
+                let aumento=costos*0.15
+                if (metodo== "TARJETA") {
+                    costos+= aumento
+                    mensaje.innerHTML=`<h4>eligio el pago con tarjeta, monto total a pagar es de  ${costos}</h4><a href="metod.html">reservar</a>`
+                    metodopago.reset();
+                }else{
+                    costos-= aumento
+                    mensaje.innerHTML=`<h4>eligio el pago en efectivo , monto total a pagar es de  ${costos}</h4><a href="metod.html">reservar</a>`
+                    metodopago.reset();
+                }
             }else{
-                costos-= aumento
-                confirm.innerHTML=`<a href="metod.html">reservar</a>`
-                document.body.appendChild(confirm)
-                mensaje.innerHTML=`<h4>eligio el pago con targeta, monto total a pagar es de  ${costos}</h4>`
+                mensaje.innerHTML="<h4>ingrese datos correctos<h4>";
             }
-        }else{
-            mensaje.innerHTML="<h4>ingrese datos correctos<h4>";
-        }
+        }    
+    }else{
+        mensaje.innerHTML= "<h4> debe elejir un destino primero</h4>";
     }    
+
 }, false);   
 
 
 
 
-
-    
 
 
 

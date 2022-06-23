@@ -1,9 +1,10 @@
 export class Reserva{
-    constructor(nombre,apellido,documento,pago){
+    constructor(nombre,apellido,documento,pago,fecha){
         this.nombre=nombre;
         this.apellido=apellido;
         this.documento=documento;
         this.pago=pago;
+        this.fecha=fecha;
         this.destino=[];
     }
     agregarDestino(viaje){
