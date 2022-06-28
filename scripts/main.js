@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             <hr class="d-none d-lg-block mb-0 ms-0" /></div></div></div></div></div><br></button>`
             
             divdest.appendChild(muestra);
-            const botonaza=document.getElementById(`${lugar.id}`);
-            botonaza.addEventListener("click",()=>{
+            const botondest=document.getElementById(`${lugar.id}`);
+            botondest.addEventListener("click",()=>{
                 destinos(lugar.id)
             });
         
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const pasencontrado=busqueda.find((el)=> el.pasword == localuser.pasword)
             if( encontrado && pasencontrado){
             // if(localuser.usuario== busqueda.usuario && localuser.pasword== busqueda.pasword){
-                location.reload(),
+                location.reload()
                 formulario.innerHTML=`<h1>Bienvenido  ${localuser.usuario}</h1>`
                 return 
             } else {
@@ -186,6 +186,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
+// 1 - Creo que ahora está un poco confuso el tema del inicio de sesión y registro de cuentas en cuanto a la interfaz del sitio.
+//  En la página principal hay un formulario de cuentas que tiene dos botones, ingresar y registrarse, pero el botón de 
+//  registrarse depende de donde hagas click hace cosas diferentes. El botón puede enviar el formulario actual y recargar l
+// a página principal, o te envía a la página de login. Esto sucede porque ese elemento del botón de registro, 
+// vos lo estás creando en el HTML con un link dentro de un botón, y depende de donde hagas click, este funciona como el 
+// link o el botón. Para solucionarlo podrías quitar directamente el tag "button", y darle los estilos del botón con una clase 
+// al link de registrarse.
+
+// En la página de login.html, se registra un usuario en el sistema, pero el botón de envío del formulario dice "Ingresar", 
+// esto puede causar confusión en cuanto la función del botón, lo mismo sucede con el nombre del HTML, que es "login", 
+// cuando aquí se registra al usuario.
+
+// También, ahora cuando se envía el formulario de registro, y existe algún error de verificación, no se muestra ningún
+//  mensaje al usuario avisándole que pasó. Creo que sería bueno que agregues mensajes de error cuando esto sucede, 
+//  así los usuarios saben que cometieron un error, y como arreglarlo.
+
+// Por último, creo que la sección que muestra el título de "tito baraton", se podría eliminar de la página de registro, 
+// ya que hace que tengamos que scrollear hasta abajo de la página para ver el formulario de registro, que debería ser lo 
+// principal de esta página.
+
+
+
+// 2 - Si registramos un usuario en el sitio, y luego vamos al formulario de inicio de sesión, y sin ingresar ningún
+//  dato se toca "ingresar", cuando se recargue la página va a aparecer como que estamos logeados, aunque no pusimos 
+//  ningún dato en los inputs. Esto sucede porque en la línea 66 de main.js, vos estás guardando la sesión del usuario 
+//  antes de hacer el chequeo de sí este usuario existe. Se debería guardar solo si se cumplen las condiciones del if 
+//  de la línea 69.
+
+
+// 4 - El select que agregaste, que permite seleccionar un destino, ahora lo estás generando de manera manual en el HTML.
+//  Vos al tener los datos de todos los viajes disponibles en el JS, podrías crear cada opción del select de forma programática,
+//   con un for, para hacer más flexible la creación del mismo.
+
+
+
+
+// 5 - Ahora, luego de que se seleccione un destino, y se debe elegir el método de pago, la página recarga y se debe bajar 
+// hasta el fondo para elegir este método. Si un usuario es nuevo y no sabe que hacer, puede quedar bastante confundido de
+//  como continuar, por lo que podrías mover al usuario con JS hasta esa sección al recargar la página, 
+//  así queda claro que tiene que hacer. Esto se puede hacer con la función "scrollIntoView" de JavaScript,
+//  te dejo un link con más 
+//  info https://stackoverflow.com/questions/13266746/scroll-jump-to-id-without-jquery?answertab=trending#tab-top.
+
+
+
+// 6 - El botón de cerrar sesión que aparece en el navbar, 
+// solo debería estar ahí cuando el usuario ya inicio sesión. 
+// Si el usuario no tiene cuenta no debería aparecer, ya que no puede cerrar una sesión que no existe.
 
 
 
