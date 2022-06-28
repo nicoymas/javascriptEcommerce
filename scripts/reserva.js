@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if(validar){ 
             Swal.fire({
-                title: 'Do you want to save the changes?',
+                title: 'confirma tu reserva',
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown'
                 },
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <tr><td>${res.nombre}</td><td>${res.apellido}</td><td>${res.documento}</td><td>realizado</td><td>${res.destino[0].reg}</td><td> ${res.fecha}</tr></table><br>`//${destino.reg}
                     
                 } else if (result.isDenied) {
-                    Swal.fire('Changes are not saved', '', 'info')
+                    Swal.fire('la reserva fue cancelada', '', 'info')
                 
                 }
               })

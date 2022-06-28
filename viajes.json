@@ -1,0 +1,20 @@
+[
+    {
+        "id":1 ,
+        "region":"Cancun",
+        "precio": 2000 , 
+        "imagen":"https://t-cf.bstatic.com/xdata/images/hotel/max1024x768/319148225.jpg?k=2cb97b204ecc359bf8f5b82f183068167ca910965c83ddb72812f5ce6d3b2871&o=&hp=1"
+    },
+    {
+        "id":2 ,
+        "region":"Playa del Carmen",
+        "precio": 2500 , 
+        "imagen":"https://www.coming2.com/co2content/co2image/1418246196811/playa-del-carmen-RMY-PLAYA-CAR.jpg" 
+    },
+    {
+        "id":3 ,
+        "region":"Japon", 
+        "precio": 3000, 
+        "imagen":"https://www.caracteristicas.co/wp-content/uploads/2018/08/japon-e1573443550864.jpg" 
+    }
+]

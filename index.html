@@ -32,8 +32,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#proyecto">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#formdest">Projects</a></li>
                         <li class="nav-item"><a class="nav-link" id ="logout" href="#signup">cerrar sesion</a></li>
                     </ul>
                 </div>
@@ -69,7 +69,7 @@
             <form action=""  id="formularioguard">
                 <label for="nombre">usuario :</label>
                 <input type="text" name="nomb" id="usernames" title="nombre" >
-                <label for="contra">password guardado</label>
+                <label for="contra">password :</label>
                 <input type="password" name="passw" id="passw" title="pasword" >
                 <div>
                     <button class="btn btn-primary" type="submit" id="botonbusca" > ingresar</button>
@@ -91,31 +91,21 @@
                     <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt="..." /></div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="featured-text text-center text-lg-left">
-                            <h4>Obreros trabajando</h4>
+                            <h4 id ="proyecto">Obreros trabajando</h4>
                             <p class="text-black-50 mb-0">Optimizando y agregando funcionalidades</p>
                         </div>
                     </div>
                 </div>
                 <div>
                     
-                    <h3> seleccione su destino por ID</h3>
+                    <h3> elija su destino</h3>
                     <h4 id="error"></h4>
+                    
                     <form action="" method="post" id="formdest">
-                        <select name="metodos" id="idlugar">               
-                            <option value="1">cancun</option>
-                            <option value="2">playa del carmen</option>
-                            <option value="3">japon</option>
-                        </select>
-                        <!-- <label for="lugar">Id Destino:</label>
-                        
-                        <input type="number" name="dest" id="idlugar" title="luga" > -->
-                        <input type="submit" value="Enviar" >
-                        <h4 id="idval" style=" color:rgb(22, 85, 85)"></h4>
+                         
                     </form>
                 </div>
-                <!-- Project One Row-->
                 
-                <!-- Project Two Row-->
                 
             </div>
         </section>

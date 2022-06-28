@@ -5,14 +5,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     
-    const viajes =[
-        {id:1 ,region:"Cancun",precio: 2000 , imagen:"https://t-cf.bstatic.com/xdata/images/hotel/max1024x768/319148225.jpg?k=2cb97b204ecc359bf8f5b82f183068167ca910965c83ddb72812f5ce6d3b2871&o=&hp=1"},
-        {id:2 ,region:"Playa del Carmen",precio: 2500 , imagen:"https://www.coming2.com/co2content/co2image/1418246196811/playa-del-carmen-RMY-PLAYA-CAR.jpg" },
-        {id:3 ,region:"Japon", precio: 3000, imagen:"https://www.caracteristicas.co/wp-content/uploads/2018/08/japon-e1573443550864.jpg" },
-    ];
+   
     
+    
+    
+    const valore= window.location.search;
+    //console.log(valore);    
+    //console.log(viajes[2])
+    const divdest=document.getElementById("datos");
+    fetch('viajes.json')
+    .then((data)=>data.json())
+    .then((viajes)=>{
+        localStorage.setItem("listaviajes",JSON.stringify(viajes))
+        for(const lugar of viajes){
+            let muestra = document.createElement("div"); 
+            muestra.className="formdest"
+            muestra.innerHTML=`<button id="${lugar.id}" type="submit"  > <br><div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+            <div class="col-lg-6"><img class="img-fluid" src="${lugar.imagen}" alt="..." /></div>
+            <div class="col-lg-6">
+                <div class="bg-black text-center h-100 project">
+                    <div class="d-flex h-100">
+                        <div class="project-text w-100 my-auto text-center text-lg-left">
 
-    localStorage.setItem("listaviajes",JSON.stringify(viajes));
+                        <h4 class="text-white">id: ${lugar.id}</h4>
+                            <h4 class="text-white"> ${lugar.region}</h4>
+                            <p class="mb-0 text-white-50">${lugar.precio} $</p>
+                            <hr class="d-none d-lg-block mb-0 ms-0" /></div></div></div></div></div><br></button>`
+            
+            divdest.appendChild(muestra);
+            const botonaza=document.getElementById(`${lugar.id}`);
+            botonaza.addEventListener("click",()=>{
+                destinos(lugar.id)
+            });
+        
+    }})
     
     const guardados=JSON.parse(localStorage.getItem("listaviajes"));
     
@@ -20,30 +46,13 @@ document.addEventListener('DOMContentLoaded', function() {
         new clases.Viaje(objeto);
     }; 
     
+  
     
+    let costo=0
+    let img
+    let reg
     
-    const divdest=document.getElementById("datos");
-    const nuevoul= document.createElement("ul");
-    nuevoul.id="destino";
-    divdest.append(nuevoul);
-    document.getElementById("destino");
-    for(const lugar of viajes){
-        let muestra = document.createElement("li");
-        muestra.innerHTML=`<div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-        <div class="col-lg-6"><img class="img-fluid" src="${lugar.imagen}" alt="..." /></div>
-        <div class="col-lg-6">
-            <div class="bg-black text-center h-100 project">
-                <div class="d-flex h-100">
-                    <div class="project-text w-100 my-auto text-center text-lg-left">
-                        <h4 class="text-white">id: ${lugar.id}</h4>
-                        <h4 class="text-white"> ${lugar.region}</h4>
-                        <p class="mb-0 text-white-50">${lugar.precio} $</p>
-                        <hr class="d-none d-lg-block mb-0 ms-0" /></div></div></div></div></div>`
-        
-        nuevoul.appendChild(muestra);
-    }
-    
-     
+   
     const logout=document.getElementById("logout");
     logout.addEventListener("click",(e)=>{
         e.preventDefault();
@@ -56,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const busqueda=JSON.parse(localStorage.getItem("users"));
     const sesion=JSON.parse(sessionStorage.getItem("usuariossesion"));
     let noencontrado =document.getElementById("error1")
-    console.log(busqueda[3])
     if(sesion == null){
         botonsito.addEventListener("click",validacion)
         function validacion(e){
@@ -79,23 +87,19 @@ document.addEventListener('DOMContentLoaded', function() {
         formulario.innerHTML=`<h1>Bienvenido  ${sesion.usuario}</h1>`
     }
     
-    const formdest=document.getElementById("formdest");
-    let lugarid=document.getElementById("idlugar");
-    let costo=0
-    let img
-    let reg
-    formdest.addEventListener("submit",destinos);
     
-    function destinos(e){
-        e.preventDefault();
+    
+    function destinos( lugar){
+        
         if(sesion != null){
-            let pais = lugarid.value;            
+           
+            let pais = lugar;            
+            //console.log(pais)
             guardados.forEach((obj)=>{
                 if(obj.id == pais){
                     costo = obj.precio
                     img = obj.imagen
                     reg = obj.region     
-            
                     Swal.fire({
                         title: `viaje a ${reg}`,
                         text: `$ ${costo}`,    
@@ -118,12 +122,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                 }             
             });  
+            
+        
         }else{
             let mensaje= document.getElementById("error")
             mensaje.innerHTML="<h4>debe registrarse para continuar</h4>";
         }
     }
-    
+
+
+
+
     //ver monto total
    
     const mensaje=document.getElementById("mensajecosto")
@@ -133,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let loadviajes=JSON.parse(sessionStorage.getItem("datosviaje"));
     
-    console.log(loadviajes);
+    
     
 
     if(loadviajes!= null){
@@ -143,16 +152,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <h2>${loadviajes.reg}</h2><h2>${loadviajes.costo}</h2>
         <img src="${loadviajes.img} "alt="${loadviajes.reg}"height="300 px" width="1000 px id ="imagenviajes">`
         
-        const borrarviaje=document.createElement("button");
-        borrarviaje.id="borrarviaje"
-        borrarviaje.textContent="seguir viendo"
-        formdest.append(borrarviaje);
-        
-        borrarviaje.addEventListener("click",(e)=>{
-            e.preventDefault();
-            sessionStorage.removeItem("datosviaje");
-            window.location.href="index.html";
-        })
         
     
         let costos= loadviajes.costo
