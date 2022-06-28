@@ -187,25 +187,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-// 1 - Creo que ahora está un poco confuso el tema del inicio de sesión y registro de cuentas en cuanto a la interfaz del sitio.
-//  En la página principal hay un formulario de cuentas que tiene dos botones, ingresar y registrarse, pero el botón de 
-//  registrarse depende de donde hagas click hace cosas diferentes. El botón puede enviar el formulario actual y recargar l
-// a página principal, o te envía a la página de login. Esto sucede porque ese elemento del botón de registro, 
-// vos lo estás creando en el HTML con un link dentro de un botón, y depende de donde hagas click, este funciona como el 
-// link o el botón. Para solucionarlo podrías quitar directamente el tag "button", y darle los estilos del botón con una clase 
-// al link de registrarse.
 
-// En la página de login.html, se registra un usuario en el sistema, pero el botón de envío del formulario dice "Ingresar", 
-// esto puede causar confusión en cuanto la función del botón, lo mismo sucede con el nombre del HTML, que es "login", 
-// cuando aquí se registra al usuario.
 
-// También, ahora cuando se envía el formulario de registro, y existe algún error de verificación, no se muestra ningún
-//  mensaje al usuario avisándole que pasó. Creo que sería bueno que agregues mensajes de error cuando esto sucede, 
-//  así los usuarios saben que cometieron un error, y como arreglarlo.
 
-// Por último, creo que la sección que muestra el título de "tito baraton", se podría eliminar de la página de registro, 
-// ya que hace que tengamos que scrollear hasta abajo de la página para ver el formulario de registro, que debería ser lo 
-// principal de esta página.
+
+
+
 
 
 

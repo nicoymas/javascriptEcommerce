@@ -44,6 +44,19 @@ boton.addEventListener("click",(e)=>{
         form.innerHTML= `<button class="btn btn-primary" > <a href="index.html" style="color:rgb(23, 66, 158)">ingresar</a>
         </button>`
         
+    }else{
+        Swal.fire({
+            title: 'error',
+            text: 'los campos deben tener minimo 5 caracteres',
+            icon: 'error',
+            confirmButtonText: 'continuar',
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+        })
     }
 
 })  
