@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
    
     
     
-    
+    const guardados=JSON.parse(localStorage.getItem("listaviajes"));
     const valore= window.location.search;
     //console.log(valore);    
     //console.log(viajes[2])
@@ -40,19 +40,16 @@ document.addEventListener('DOMContentLoaded', function() {
         
     }})
     
-    const guardados=JSON.parse(localStorage.getItem("listaviajes"));
-    
+    // const guardados=JSON.parse(localStorage.getItem("listaviajes"));
     for(const objeto of guardados){
         new clases.Viaje(objeto);
     }; 
-    
-  
-    
+       
     let costo=0
     let img
     let reg
     
-   
+    
     const logout=document.getElementById("logout");
     logout.addEventListener("click",(e)=>{
         e.preventDefault();
@@ -65,7 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const busqueda=JSON.parse(localStorage.getItem("users"));
     const sesion=JSON.parse(sessionStorage.getItem("usuariossesion"));
     let noencontrado =document.getElementById("error1")
+    
     if(sesion == null){
+        logout.style.display="none";
         botonsito.addEventListener("click",validacion)
         function validacion(e){
             e.preventDefault();
@@ -75,7 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const encontrado=busqueda.find((el)=> el.usuario == localuser.usuario)
             const pasencontrado=busqueda.find((el)=> el.pasword == localuser.pasword)
             if( encontrado && pasencontrado){
-            // if(localuser.usuario== busqueda.usuario && localuser.pasword== busqueda.pasword){
                 location.reload()
                 formulario.innerHTML=`<h1>Bienvenido  ${localuser.usuario}</h1>`
                 return 
@@ -88,13 +86,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     
-    
-    function destinos( lugar){
-        
+    function destinos( lugar){ 
         if(sesion != null){
-           
             let pais = lugar;            
-            //console.log(pais)
             guardados.forEach((obj)=>{
                 if(obj.id == pais){
                     costo = obj.precio
@@ -195,12 +189,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-// 2 - Si registramos un usuario en el sitio, y luego vamos al formulario de inicio de sesión, y sin ingresar ningún
-//  dato se toca "ingresar", cuando se recargue la página va a aparecer como que estamos logeados, aunque no pusimos 
-//  ningún dato en los inputs. Esto sucede porque en la línea 66 de main.js, vos estás guardando la sesión del usuario 
-//  antes de hacer el chequeo de sí este usuario existe. Se debería guardar solo si se cumplen las condiciones del if 
-//  de la línea 69.
 
 
 // 4 - El select que agregaste, que permite seleccionar un destino, ahora lo estás generando de manera manual en el HTML.
