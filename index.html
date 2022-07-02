@@ -32,9 +32,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#reservas">TusReservas</a></li>
                         <li class="nav-item"><a class="nav-link" href="#proyecto">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#formdest">Projects</a></li>
-                        <li class="nav-item"><a class="nav-link" id ="logout" href="#signup">cerrar sesion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#viaje">destino</a></li>
+                        <li class="nav-item"><a class="nav-link" id ="logout" >cerrar sesion</a></li>
                     </ul>
                 </div>
             </div>
@@ -83,7 +84,7 @@
         <!-- Projects-->
         <section class="projects-section bg-light" id="datos">
             <div id="datos">
-
+                <div id="mensajecarga"></div>
             </div>
             <div class="container px-4 px-lg-5">
                 <!-- Featured Project Row-->
@@ -91,22 +92,11 @@
                     <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt="..." /></div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="featured-text text-center text-lg-left">
-                            <h4 id ="proyecto">Obreros trabajando</h4>
-                            <p class="text-black-50 mb-0">Optimizando y agregando funcionalidades</p>
+                            <h4 id ="proyecto">elija su destino</h4>
+                            <p class="text-black-50 mb-0">Optimizando y agregando funcionalidades, para ud..</p>
                         </div>
                     </div>
                 </div>
-                <div>
-                    
-                    <h3> elija su destino</h3>
-                    <h4 id="error"></h4>
-                    
-                    <form action="" method="post" id="formdest">
-                         
-                    </form>
-                </div>
-                
-                
             </div>
         </section>
         <!-- Signup-->
@@ -125,10 +115,7 @@
                             </div>
                             <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">An email is required.</div>
                             <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">Email is not valid.</div>
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
+                         
                             <div class="d-none" id="submitSuccessMessage">
                                 <div class="text-center mb-3 mt-2 text-white">
                                     <div class="fw-bolder">Form submission successful!</div>
@@ -137,42 +124,15 @@
                                     <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
                                 </div>
                             </div>
-                            <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                            <!-- an error submitting the form-->
+                           
                             <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
-        <div>
-
-            <h4>el pago con targeta tiene un 15% de aumento y en efectivo el 15% de descuento indique el metodo de pago efectivo o targeta</h4>
-            <form id="metodform">
-                
-                <label for="nomb">consultar metodos</label>
-                <select name="metodos" id="metodid">               
-                    <option value="TARJETA">TARJETA</option>
-                    <option value="EFECTIVO">EFECTIVO</option>
-                </select>
-                <!-- <input type="text" name="nomb" id="metodid" title="nombre" > -->
-                
-                <input type="submit" value="Enviar" >
-                
-                
-                
-                <h4 id="error"></h4>
-                <h4 id="mensajecosto"></h4>
-                <div id="datos">    
-                </div>
-                <li id="confirm" ></li>
-            </form>
-            
-            <div id="datos2">
-        
-            </div>
+        <br>
+        <div id="reservas" ></div>
         <!-- Contact-->
         <section class="contact-section bg-black">
             <div class="container px-4 px-lg-5">

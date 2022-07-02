@@ -2,7 +2,7 @@
 import * as clases  from "./classusuario.js"
 
 //guardar usuario en localstorage    
-//localStorage.removeItem("users");
+
 const admin={usuario:"admin",pasword:"admin"}
 const datausers=JSON.parse(localStorage.getItem("users")) || [];
 if(datausers.length==0){
@@ -41,7 +41,6 @@ boton.addEventListener("click",(e)=>{
         datausers.push(datosUsuario)
 
         localStorage.setItem('users', JSON.stringify(datausers));
-        const userguardados=JSON.parse(localStorage.getItem("usuariosguardados"))
         const usuarios= new clases.User();
         usuarios.agregarusuario({datosUsuario})
         

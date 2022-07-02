@@ -1,5 +1,4 @@
 
-
 export class Viaje{
     constructor(id,region,precio){
         this.id=id;

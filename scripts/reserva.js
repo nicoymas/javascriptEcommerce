@@ -2,35 +2,74 @@ import * as clase from "./classReserva.js";
 document.addEventListener('DOMContentLoaded', function() {
 
     
+       
+    const mensaje=document.getElementById("mensajecosto")
+    const metodopago=document.getElementById("metodform");
+    const metodid=document.getElementById("metodid");
+    const destino=document.getElementById("datos2")    
+    const loadviajes=JSON.parse(sessionStorage.getItem("datosviaje"));
+    //se muestran los datos del destino seleccionado y se le aplica el aumento o descuento segun el metodo de pago
+    // y se guarda la reserva en el session storage
+    if(loadviajes!= null){
     
+        let costos= loadviajes.costo
+        
+        destino.innerHTML=`<h2>${loadviajes.reg}</h2><h2>${loadviajes.costo}$</h2>
+        <img src="${loadviajes.img} "alt="${loadviajes.reg}"height="250 px" width="300 px id ="imagenviajes">`
+        metodopago.addEventListener("submit",metodoDePago);
+        
+        function metodoDePago(event){
+            event.preventDefault(); 
+            let metodo= metodid.value
+            if(metodo== "TARJETA" || metodo== "EFECTIVO"){
+                let aumento=costos*0.15
+                const edicion=JSON.parse(sessionStorage.getItem("datosviaje"))
+                
+                if (metodo== "TARJETA") {
+                    let tarjeta=costos+aumento
+                    const pagotargeta={costo: tarjeta, img:edicion.img, reg:edicion.reg}
+                    mensaje.innerHTML=`<h4>eligio el pago con tarjeta, monto total a pagar es de  ${tarjeta}</h4>`
+                    sessionStorage.setItem("datosviaje",JSON.stringify(pagotargeta))
+                }else{
+                    let efectivo=costos- aumento
+                    const pagoefectivo={costo: efectivo, img:edicion.img, reg:edicion.reg}
+                    mensaje.innerHTML=`<h4>eligio el pago en efectivo , monto total a pagar es de  ${efectivo}</h4>`
+                    sessionStorage.setItem("datosviaje",JSON.stringify(pagoefectivo))
+                }
+            }else{
+                mensaje.innerHTML="<h4>ingrese datos correctos<h4>";
+            }
+        }    
+    }else{
+        mensaje.innerHTML= "<h4> debe elejir un destino primero</h4>";
+    }    
     
     const formreserva=document.getElementById("formreserva");
-    const butonconfirm=document.getElementById("confirm");
     let nombreval = document.getElementById('nombreval')
     let apellidoval = document.getElementById('apellidoval')
     let documentoval = document.getElementById('documentoval')
     let fechaval = document.getElementById('fechaval')
     
-    butonconfirm.addEventListener("click",confirmacion);
-  
-    function confirmacion(event){  
-        event.preventDefault();
+
+    //obteniendo datos del usuario para guardar junto con el viaje
+    formreserva.addEventListener("submit",(e)=>{
+        e.preventDefault();
         let nombre=document.getElementById("formreserva")[0].value;
         let apellido=document.getElementById("formreserva")[1].value;
         let documento=document.getElementById("formreserva")[2].value;
         let pago=true
         let fecha=document.getElementById("formreserva")[3].value;
-        // evitar que envie form vacios
+        //evitar que envie form vacios
         nombreval.innerHTML= ((nombre||'vacio')==='vacio')?'falto rellenar este campo':''
         apellidoval.innerHTML= ((apellido||'vacio')==='vacio')?'falto rellenar este campo':''
         documentoval.innerHTML= ((documento||'vacio')==='vacio')?'falto rellenar este campo':''
         fechaval.innerHTML= ((fecha||'vacio')==='vacio')?'falto rellenar este campo':''
-
+        console.log(nombre)
         let validar = (((nombre||'vacio')!=='vacio')&&
         ((apellido||'vacio')!=='vacio')&&
         ((documento||'vacio')!=='vacio')&&
         ((fecha||'vacio')!=='vacio'))   
-
+        console.log(validar)
         if(validar){ 
             Swal.fire({
                 title: 'confirma tu reserva',
@@ -40,53 +79,45 @@ document.addEventListener('DOMContentLoaded', function() {
                 hideClass: {
                     popup: 'animate__animated animate__fadeOutUp'
                 },
-                
                 showDenyButton: true,
-                
                 confirmButtonText: 'Save',
                 denyButtonText: `Don't save`,
-              }).then((result) => {
+            }).then((result) => {
                 
                 if (result.isConfirmed) {
                     Swal.fire('Saved!', '', 'success')
-                    // llamo a viajes
+                   
                     const destino=JSON.parse(sessionStorage.getItem("datosviaje")) 
-                    // guardo datos del viajes en otro sessionStorage
-                    const dest={img:destino.img,reg:destino.reg,costo:destino.costo}
-                    sessionStorage.setItem("dest",JSON.stringify(dest))
-                    //llamo d a datos
-                    const datadest=JSON.parse(sessionStorage.getItem("dest"))
-                    // guardo datos de formulario
+            
                     const reserva=new clase.Reserva(nombre,apellido,documento,pago,fecha)
-                    reserva.agregarDestino(datadest)
-                    // guardo reserva con datos de formulario y viaje
-                    sessionStorage.setItem("reserva",JSON.stringify(reserva));
-                    // llamo la reserva
-                    const res =JSON.parse(sessionStorage.getItem("reserva"))
-                    // se borran datos de viaje
+                    reserva.agregarDestino(destino)
+                    
+                    const res =JSON.parse(sessionStorage.getItem("reserva")) || []
+                    res.push(reserva)
+                    console.log(reserva)
+
+                    sessionStorage.setItem("reserva",JSON.stringify(res))
+                    
                     sessionStorage.removeItem("datosviaje")
-                    formreserva.innerHTML=`<table border="1"><tr><td border="1">nombre</td><td>apellido</td><td>documento</td><td>pago</td><td>destino</td><td>fecha</td></tr>
-                    <tr><td>${res.nombre}</td><td>${res.apellido}</td><td>${res.documento}</td><td>realizado</td><td>${res.destino[0].reg}</td><td> ${res.fecha}</tr></table><br>`//${destino.reg}
+                    
+                    formreserva.innerHTML=`<table border="1"><tr><td border="1">nombre</td>
+                    <td>apellido</td><td>documento</td><td>pago</td><td>destino</td><td>fecha</td></tr>
+                    <tr><td>${reserva.nombre}</td><td>${reserva.apellido}</td><td>${reserva.documento}</td>
+                    <td>${reserva.destino[0].costo}</td><td>${reserva.destino[0].reg}</td><td> ${reserva.fecha}</tr></table><br>`
                     
                 } else if (result.isDenied) {
-                    Swal.fire('la reserva fue cancelada', '', 'info')
+                    Swal.fire('la reserva fue cancelada','', 'info')
                 
                 }
-              })
+            })
           
         }
         
 
-    }
-    const reservados=JSON.parse(sessionStorage.getItem("reserva")) || [];
-    console.log(reservados)
-
-    if(reservados.length > 0) {   
-        const inerreserva=document.getElementById("reservas");
-        inerreserva.innerHTML=`<table><tr><td>nombre</td><td>apellido</td><td>documento</td><td>pago</td><td>destino</td></tr>
-        <tr><td>${reservados.nombre}</td><td>${reservados.apellido}</td>
-        <td>${reservados.documento}</td><td>realizado</td><td>${rescdest.reg }</td></tr></table><br><img src="${rescdest.img}" height="300 px" width="360 px" > </img>`
-    }
+    });
+    
+    
+  
 
     
 
