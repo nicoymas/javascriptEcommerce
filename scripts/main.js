@@ -1,27 +1,29 @@
-
+// importando clases viajes 
 import * as clases from './classviaje.js'
-
+// todo el codigo dentro del DOMContentLoaded se ejecuta cuando el DOM esta cargado
 document.addEventListener('DOMContentLoaded', function() {
 
     
-    
+    // ---------->Viajes<----------
     
     // mensaje hasta que se carguen los viajes
-    const mensajecarga=document.getElementById("mensajecarga");
-    mensajecarga.innerHTML="<h2>Cargando viajes...</h2>";
-    const guardados=JSON.parse(localStorage.getItem("listaviajes"));
+    const MensajeCarga=document.getElementById("MensajeCarga");
+    MensajeCarga.innerHTML="<h2>Cargando viajes...</h2>";
+
+    // html donde se cargaran los viajes
+    const HtmlDestinos=document.getElementById("datos");
     
-    const divdest=document.getElementById("datos");
-    //cargando dtos de viajes .JSON
+    //cargando datos de viajes .JSON
     fetch('viajes.json')
     .then((data)=>data.json())
     .then((viajes)=>{
+        //guardando datos de viajes para luego usarlos en funciones
         localStorage.setItem("listaviajes",JSON.stringify(viajes))
+        // por cada viaje se crea una div con una imagen y una descripcion
         for(const lugar of viajes){
-           //mostrando dados de viajes
-            let muestra = document.createElement("div");
-            muestra.className="formdest"
-            muestra.innerHTML=`<button id="${lugar.id}" type="submit"  > <br><div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+            let Muestra = document.createElement("div");
+            Muestra.className="formdest"
+            Muestra.innerHTML=`<button id="${lugar.id}" type="submit"  > <br><div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
             <div class="col-lg-6"><img class="img-fluid" src="${lugar.imagen}" alt="..." /></div>
             <div class="col-lg-6">
                 <div  id="viaje" class="bg-black text-center h-100 project">
@@ -32,8 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <h4 class="text-white"> ${lugar.region}</h4>
                             <p class="mb-0 text-white-50">${lugar.precio} $</p>
                             <hr class="d-none d-lg-block mb-0 ms-0" /></div></div></div></div></div><br></button>`
-            mensajecarga.innerHTML="";
-            divdest.appendChild(muestra);
+            //anulando mensaje de carga
+            MensajeCarga.innerHTML="";
+            // agrega el elemento creado al div de datos
+            HtmlDestinos.appendChild(Muestra);
             //agregando evento al viaje para enviar datos a function destinos
             const botondest=document.getElementById(`${lugar.id}`);
             botondest.addEventListener("click",()=>{
@@ -42,27 +46,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
             });
         }
-
-        for(const objeto of guardados){
+        
+        const ViajesGuardados=JSON.parse(localStorage.getItem("listaviajes"));
+        //por cada objeto de viaje se crea una clase viaje
+        for(const objeto of ViajesGuardados){
             new clases.Viaje(objeto);
         }; 
 
+        // ---------->seleccion de destino<----------
+        
+        // variables donde quedan los datos individuales del viaje elejido para utilizarlo en otras funciones
         let costo=0
         let img
         let reg
+        const UserSesion=JSON.parse(sessionStorage.getItem("usuariossesion"));
         //verificando si el usuario esta logueado para acceder a esta funcion
         //se extraen datos del viaje seleccionado y se guardan en el session storage
-        function destinos( lugar){ 
-            if(sesion != null){
-                let pais = lugar;            
-                guardados.forEach((obj)=>{
+        function destinos(lugar){ 
+            if(UserSesion != null){
+                let pais = lugar;
+                //recorre el array de viajes para extraer los datos del viaje seleccionado            
+                ViajesGuardados.forEach((obj)=>{
                     if(obj.id == pais){
                         costo = obj.precio
                         img = obj.imagen
                         reg = obj.region     
-                        let datosviaje={costo:costo,img:img,reg:reg}
-                                
-                        sessionStorage.setItem('datosviaje',JSON.stringify(datosviaje));
+                        //se guardan todos los datos en el session para ser manipuldos en otras funciones
+                        let DatosViaje={costo:costo,img:img,reg:reg}        
+                        sessionStorage.setItem('datosviaje',JSON.stringify(DatosViaje));
+                        //libreria de sweetalert para mostrar mensaje de confirmacion
                         Swal.fire({
                             title: `viaje a ${reg}`,
                             text: `$ ${costo}`,    
@@ -75,69 +87,80 @@ document.addEventListener('DOMContentLoaded', function() {
                             cancelButtonColor: '#d33',
                             confirmButtonText: 'ver metodos de pago'
                         }).then((result) => {
+                            // en caso de confirmar el destino se redirige a la pagina de metodos de pago
                             if (result.isConfirmed) {
-                                location.href="metod.html" 
+                                location.href="Reservas.html" 
                             }else{
                                 
                             } 
                         })
                     }             
                 });  
-                
+            // en caso de que ningun usuario este logueado     
             }else{
-                let mensaje= document.getElementById("error")
-                mensaje.innerHTML="<h4>debe registrarse para continuar</h4>";
+                let MensajeDeError= document.getElementById("error")
+                MensajeDeError.innerHTML="<h4>debe registrarse para continuar</h4>";
             }
         }   
         
-        // deslogeo
-        const logout=document.getElementById("logout");
-        logout.addEventListener("click",(e)=>{
+        //---------->seccion de Logueo<----------
+
+        //--> Deslogeo
+        const Logout=document.getElementById("logout");
+        //evento para deslogearse borra los datos del usuario de session storage y recarga la pagina para que las funciones tomen los cambio
+        Logout.addEventListener("click",(e)=>{
             e.preventDefault();
             sessionStorage.clear();
             window.location.href="index.html";
         })
-    
+        
+        //-->Validacion
         const btnIniciarSesion=document.getElementById("botonbusca"); 
-        const formulario=document.getElementById("formularioguard");    
-        const busqueda=JSON.parse(localStorage.getItem("users"));
-        const sesion=JSON.parse(sessionStorage.getItem("usuariossesion"));
-        let noencontrado =document.getElementById("error1")
-        // solo muestra el formulario si no hay sesion
+        const FormSesion=document.getElementById("FormSesion");    
+        const LocalUsers=JSON.parse(localStorage.getItem("users"));
+        
+        const NoEncontrado =document.getElementById("error1")
+        
+        // solo muestra el formulario si no hay sesion iniciada
         //compara los datos igresados con ewl localStorage de usuarios y si son iguales los carga en sessionStoragepara otras funcionalidades
-        if(sesion == null){
-            logout.style.display="none";
-            btnIniciarSesion.addEventListener("click",validacion)
-            function validacion(e){
+        if(UserSesion == null){
+            Logout.style.display="none";
+            btnIniciarSesion.addEventListener("click",ValidarUser)
+            function ValidarUser(e){
                 e.preventDefault();
-                const localuser={usuario :document.getElementById("formularioguard")[0].value, pasword: document.getElementById("formularioguard")[1].value}
-                
-                sessionStorage.setItem("usuariossesion",JSON.stringify(localuser));
-                const encontrado=busqueda.find((el)=> el.usuario == localuser.usuario)
-                const pasencontrado=busqueda.find((el)=> el.pasword == localuser.pasword)
-                if( encontrado && pasencontrado){
+                //captura datos del formulario
+                const SessionUser={usuario :document.getElementById("FormSesion")[0].value, pasword: document.getElementById("FormSesion")[1].value}
+                // los compara con los datos de localStorage
+                const UserFind=LocalUsers.find((el)=> el.usuario == SessionUser.usuario)
+                const PaswordFind=LocalUsers.find((el)=> el.pasword == SessionUser.pasword)
+                //si coinsiden se guardan en sessionStorage, se recarga la pagina para que las funciones tomen los cambios
+                //y se muestra mensaje de bienvenida 
+                if( UserFind && PaswordFind){
+                    sessionStorage.setItem("usuariossesion",JSON.stringify(SessionUser));
                     location.reload()
-                    formulario.innerHTML=`<h1>Bienvenido  ${localuser.usuario}</h1>`
+                    FormSesion.innerHTML=`<h1>Bienvenido  ${SessionUser.usuario}</h1>`
                     return 
                 } else {
-                    noencontrado.innerHTML="Usuario o contraseña incorrectos";
+                    NoEncontrado.innerHTML="Usuario o contraseña incorrectos";
                 }
             }
         }else{
-            formulario.innerHTML=`<h1>Bienvenido  ${sesion.usuario}</h1>`
+            FormSesion.innerHTML=`<h1>Bienvenido  ${UserSesion.usuario}</h1>`
         }
         
-        
+    
         
     })
-    // traer datos de sessionStorage y mostrarlos   
-    const reservados=JSON.parse(sessionStorage.getItem("reserva")) || [];
-    const inerreserva=document.getElementById("reservas");
+    //--->muestra reservas en la pagina
     
-    reservados.forEach(reserva=>{
+    // traer datos de reservas en sessionStorage 
+    const ReservasInSession=JSON.parse(sessionStorage.getItem("reserva")) || [];
+    const InnerReserva=document.getElementById("reservas");
+    //por cada reserva crea un elemento html para mostrarlas en pantalla
+    ReservasInSession.forEach(reserva=>{
         
-        let muestrareserva = document.createElement("li");
-        muestrareserva.innerHTML=`<div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+        let MostraReserva = document.createElement("li");
+        MostraReserva.innerHTML=`<div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
         <div class="col-lg-6"><img class="img-fluid" src="${reserva.destino[0].img}"   height="10%" /></div>
         <div class="col-lg-6">
         <div class="bg-black text-center h-100 project">
@@ -148,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <h4 class="text-white"> ${reserva.destino[0].reg}</h4>
         <p class="mb-0 text-white-50">${reserva.destino[0].costo} $</p>
         <hr class="d-none d-lg-block mb-0 ms-0" /></div></div></div></div></div>`
-        inerreserva.appendChild(muestrareserva);
+        InnerReserva.appendChild(MostraReserva);
     })
 }, false);   
 
