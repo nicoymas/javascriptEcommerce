@@ -1,0 +1,40 @@
+
+
+/* PARTE FORMULARIO -------------*/
+
+
+.FormSesionc{
+    color: rgba(38, 95, 136, 0.905);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.FormSesionc div{
+    margin: 1rem;
+}
+.FormSesionc_input{
+    
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 0.4rem;
+    border-color: rgba(250, 235, 215, 0.476);
+    width: 20rem;
+    
+}
+
+ /* TARGETAS------------------- */
+ /* row gx-0 mb-5 mb-lg-0 justify-content-center */
+
+ .descripcion{
+    background-color:rgba(38, 95, 136, 0.905)
+ }
+ .Btnviaje{
+    margin-top: 1rem;
+    transition: 0.8s;
+ }
+
+.Btnviaje:hover{
+    background-color: rgba(0, 0, 0, 0.634);
+    transform: translate(-0.1rem, -0.1rem);
+}

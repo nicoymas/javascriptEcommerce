@@ -20,6 +20,7 @@
         
         <script src="scripts/main.js" type="module"></script>
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/stylesmain.css" rel="stylesheet" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -47,7 +48,7 @@
                     <div class="text-center">
                         <h1 class="mx-auto my-0 text-uppercase">titobaraton</h1>
                         <h2 class="text-white-50 mx-auto mt-2 mb-5">viajes baratos y responzables</h2>
-                        <a class="btn btn-primary" href="#about">Started</a>
+                        <a class="btn btn-primary" href="#FormSesion">Started</a>
                     </div>
                 </div>
             </div>
@@ -67,12 +68,14 @@
             </div>
         </section>
         <div>
-            <form action=""  id="FormSesion">
-                <label for="nombre">usuario :</label>
-                <input type="text" name="nomb" id="usernames" title="nombre" >
-                <label for="contra">password :</label>
-                <input type="password" name="passw" id="passw" title="pasword" >
+            <form action=""  id="FormSesion" class="FormSesionc">
                 <div>
+                    <input class="FormSesionc_input" type="text" name="nomb" id="usernames" title="nombre" placeholder="usuario">
+                </div>
+                <div>
+                    <input class="FormSesionc_input" type="password" name="passw" id="passw" title="pasword" placeholder="password">
+                </div>
+                <div class="FormSesionc_btn">
                     <button class="btn btn-primary" type="submit" id="botonbusca" > ingresar</button>
                     <a class= "btn btn-primary"href="registro.html">registrarse</a>
                 </div>
