@@ -38,3 +38,32 @@
     background-color: rgba(0, 0, 0, 0.634);
     transform: translate(-0.1rem, -0.1rem);
 }
+
+
+/* Reservas ----------------------------- */
+
+.Tabla_Reserva{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content:center ;
+    border: solid rgba(97, 156, 173, 0.568);
+    padding: 1rem;
+    width: 85%;
+    margin: 10%;
+    margin-top: 1rem;
+}
+
+.Tabla_Reserva div{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: rgba(65, 129, 138, 0.301);
+    margin-left: 1rem;
+    padding: 0.5rem;
+}
+.Tabla_Reserva p{
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0.5rem;
+}

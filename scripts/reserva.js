@@ -100,10 +100,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     sessionStorage.setItem("reserva",JSON.stringify(ArrayReservas))// se guarda en el sessionStorage
                     sessionStorage.removeItem("datosviaje")// y se eliminan los datos del sessionStorage "datosviajes" para volver a utilizalo en otras operaciones
                     //muestra una tabla con los la reserva realizada
-                    FormDeReserva.innerHTML=`<table border="1"><tr><td border="1">nombre</td>
-                    <td>apellido</td><td>documento</td><td>pago</td><td>Destino</td><td>fecha</td></tr>
-                    <tr><td>${reserva.nombre}</td><td>${reserva.apellido}</td><td>${reserva.documento}</td>
-                    <td>${reserva.destino[0].costo}</td><td>${reserva.destino[0].reg}</td><td> ${reserva.fecha}</tr></table><br>`   
+                    FormDeReserva.innerHTML=`
+                    <div class="Tabla_Reserva container-fluid">
+                        <div>
+                            <p>nombre</p>
+                            <p>${reserva.nombre}</p>
+                        </div>
+                        <div>
+                            <p>Apellido</p>
+                            <p>${reserva.apellido}</p>
+                        </div>
+                        <div>
+                            <p>Documento</p>
+                            <p>${reserva.documento}</p>
+                        </div>
+                        <div>
+                            <p>Pago</p>
+                            <p>${reserva.destino[0].costo}</p>
+                        </div>
+                        <div>
+                            <p>Destino</p>
+                            <p>${reserva.destino[0].reg}</p>
+                        </div>
+                        <div>
+                            <p>Fecha</p>
+                            <p>${reserva.fecha}</p>
+                        </div>
+                    </div>`   
                 } else if (result.isDenied) {//cancelacion de reserva
                     Swal.fire('la reserva fue cancelada','', 'info')         
                 }

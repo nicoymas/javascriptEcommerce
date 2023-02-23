@@ -167,26 +167,34 @@ document.addEventListener('DOMContentLoaded', function() {
     //por cada reserva crea un elemento html para mostrarlas en pantalla
     ReservasInSession.forEach(reserva=>{
         
-        let MostraReserva = document.createElement("li");
-        MostraReserva.innerHTML=
-        `<div class="container-fluid">
-            <div class="col-lg-6">
-                <img class="img-fluid" src="${reserva.destino[0].img}"   height="10%" />
+        let MostraReserva = document.createElement("div");
+        MostraReserva.innerHTML=`<div class="Tabla_Reserva container-fluid">
+            <div>
+                <p>nombre</p>
+                <p>${reserva.nombre}</p>
             </div>
-            <div class="col-lg-6">
-                <div class="bg-black text-center h-100 project">
-                    <div class="d-flex h-100">
-                        <div class="project-text w-100 my-auto text-center text-lg-left">
-                            <h4 class="text-white">${reserva.nombre}</h4>
-                            <h4 class="text-white">${reserva.apellido}</h4>
-                            <h4 class="text-white"> ${reserva.destino[0].reg}</h4>
-                            <p class="mb-0 text-white-50">${reserva.destino[0].costo} $</p>
-                            <hr class="d-none d-lg-block mb-0 ms-0" />
-                        </div>
-                    </div>
-                </div>
+            <div>
+                <p>Apellido</p>
+                <p>${reserva.apellido}</p>
             </div>
-        </div>`
+            <div>
+                <p>Documento</p>
+                <p>${reserva.documento}</p>
+            </div>
+            <div>
+                <p>Pago</p>
+                <p>${reserva.destino[0].costo}</p>
+            </div>
+            <div>
+                <p>Destino</p>
+                <p>${reserva.destino[0].reg}</p>
+            </div>
+            <div>
+                <p>Fecha</p>
+                <p>${reserva.fecha}</p>
+            </div>
+        </div>`  
+        
         InnerReserva.appendChild(MostraReserva);
     })
 }, false);   
